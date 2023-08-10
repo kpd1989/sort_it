@@ -1,6 +1,7 @@
 package ctf.sorting.utils;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -33,6 +34,9 @@ public interface ReadFile {
      * @param listDataToWrite список для записи
      */
     default <T> void writeToFile(String fileName, List<T> listDataToWrite) {
+        //создаем отчетный файл
+        new File(fileName);
+
         try (BufferedWriter writerToFile = new BufferedWriter(new FileWriter(fileName, StandardCharsets.UTF_8))) {
             for (var num : listDataToWrite) {
                 writerToFile.write(num + "\n");

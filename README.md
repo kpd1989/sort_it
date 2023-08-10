@@ -4,15 +4,19 @@ language: java
 
 jdk: openjdk17
 
+Maven: Apache Maven 3.8.1
+
 Читает из файлов (имена передаются аргументами при запуске) 
 
 и записывает данные в файл по возрастанию согласно задания (task.txt)
 
-Примеры запуска программы:
+При наличии ошибок в исходных данных (неверный тип/пробелы) -дальнейшее чтение файла прекращается. Работа программы не завершается.
 
-sort-it.exe -s in1.txt in2.txt
+Запуск программы:
 
-sort-it.exe -i in1.txt in2.txt
+java -jar sort_it-1.0-SNAPSHOT.jar -s in1.txt in2.txt
+
+java -jar sort_it-1.0-SNAPSHOT.jar -i in1.txt in2.txt
 
 где
 

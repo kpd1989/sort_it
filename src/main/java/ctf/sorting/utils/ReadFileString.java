@@ -70,6 +70,7 @@ public class ReadFileString implements ReadFile {
                 dataWithFiles.listDataFromFile.add((List<T>) dataWithFile);
 
             } catch (IOException ex) {
+                System.err.println("Ошибка доступа к файлу " + nameFile);
                 throw new RuntimeException(ex);
             }
         }

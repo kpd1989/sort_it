@@ -48,14 +48,23 @@ public class ReadFileInteger implements ReadFile {
                 List<Integer> dataWithFile = new ArrayList<>();
                 //вспомогательные переменные для временного хранения считанных данных
                 int numberValue;
-                String readedLine;
-                while ((readedLine = readerFromFile.readLine()) != null) {
-                    numberValue = Integer.parseInt(readedLine);
-                    dataWithFile.add(numberValue);
+                String readiedLine;
+                while ((readiedLine = readerFromFile.readLine()) != null) {
+
+                    //Проверяем на отсутствие текста в данных
+                    try {
+                        numberValue = Integer.parseInt(readiedLine);
+                        dataWithFile.add(numberValue);
+                    } catch (NumberFormatException ex) {
+                        System.err.printf("Неверные исходные данные в файле " + nameFile + "\n");
+                        break;
+                    }
+
                 }
                 dataWithFiles.listDataFromFile.add((List<T>)dataWithFile);
 
             } catch (IOException ex) {
+                System.err.println("Ошибка доступа к файлу " + nameFile + "\n");
                 throw new RuntimeException(ex);
             }
         }
