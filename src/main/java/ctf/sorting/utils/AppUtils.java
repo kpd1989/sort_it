@@ -32,7 +32,7 @@ public class AppUtils {
                 readFile = new ReadFileString();
                 continue;
             }
-            if (arg.contains("in")) {
+            if (arg.contains("txt")) {
                 inputFileNames.add(arg);
             }
         }
