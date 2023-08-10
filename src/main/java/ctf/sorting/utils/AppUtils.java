@@ -21,7 +21,7 @@ public class AppUtils {
         return listInputFileNames;
     }
 
-    public static void readArgs(String[] args) {
+    public static List<String> readArgs(String[] args) {
         listInputFileNames =new ArrayList<>();
 
         for (String arg : args) {
@@ -36,9 +36,14 @@ public class AppUtils {
                 listInputFileNames.add(arg);
             }
         }
-        if (listInputFileNames.size()!=2 || !listInputFileNames.contains("txt")){
-            System.out.println("Укажите в вызове программы два файла для сортировки");
-            System.exit(1);
+        try {
+            if (listInputFileNames.size()!=2){
+                throw new IllegalArgumentException("Укажите в вызове программы два файла для сортировки");
+            }
+        } catch (IllegalArgumentException ex){
+            ex.printStackTrace();
         }
+
+        return listInputFileNames;
     }
 }
