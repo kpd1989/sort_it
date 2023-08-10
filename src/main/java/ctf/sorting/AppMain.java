@@ -9,8 +9,8 @@ public class AppMain {
 
         //чтение аргументов
         readArgs(args);
-        //чтение исходных данных и сортировка
-        List result = getReadFile().sorting(getReadFile().readFromFile(getInputFileNames()));
+       //чтение исходных данных и сортировка
+        List<?> result = getReadFile().sorting(getReadFile().readFromFile(getInputFileNames()));
         //запись результата
         getReadFile().writeToFile("out.txt", result);
 

@@ -7,17 +7,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- *
  * Интерфейс для реализации методов чтения и сортировки
  * в зависимости от входящих данных
  */
-public interface ReadFile<T> {
+public interface ReadFile {
 
     /**
      * @param inputFileNames список имен файлов для слияния
      * @return считанные строки из файлов
      */
-    List<List<T>> readFromFile(List<String> inputFileNames);
+    <T> List<List<T>> readFromFile(List<String> inputFileNames);
 
     /**
      * сортировка слиянием
@@ -25,16 +24,17 @@ public interface ReadFile<T> {
      * @param inputList списки на сортировку
      * @return отсортированный список
      */
-    List sorting(List<List<T>> inputList);
+    <T> List<T> sorting(List<List<T>> inputList);
 
     /**
      * Метод записи отсортированных данных
-     * @param fileName имя файла для записи
-     * @param result список для записи
+     *
+     * @param fileName        имя файла для записи
+     * @param listDataToWrite список для записи
      */
-    default void writeToFile(String fileName, List result) {
+    default <T> void writeToFile(String fileName, List<T> listDataToWrite) {
         try (BufferedWriter writerToFile = new BufferedWriter(new FileWriter(fileName, StandardCharsets.UTF_8))) {
-            for (var num : result) {
+            for (var num : listDataToWrite) {
                 writerToFile.write(num + "\n");
                 writerToFile.flush();
             }

@@ -4,20 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Вспомогательный класс
- * для считывания данных запуска
+ * Класс для считывания данных запуска
  */
 public class AppUtils {
 
     //для чтения данных, храним названия переданных файлов
     private static List<String> inputFileNames;
-    //
+    //стратегия чтения и сортировки данных
+    //по умолчанию String
     private static ReadFile readFile = new ReadFileString();
 
     public static ReadFile getReadFile() {
         return readFile;
     }
-
     public static List<String> getInputFileNames() {
         return inputFileNames;
     }
@@ -38,5 +37,4 @@ public class AppUtils {
             }
         }
     }
-
 }

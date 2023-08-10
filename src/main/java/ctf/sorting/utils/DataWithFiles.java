@@ -7,7 +7,7 @@ import java.util.List;
  * 
  * Класс для хранения считанных данных
  */
-public class ReadDataBase<T> {
+public class DataWithFiles<T> {
     List<List<T>> listDataFromFile = new ArrayList<>();
 
 }

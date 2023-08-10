@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * Реализация методов чтения и сортировки для строки
  */
-public class ReadFileString implements ReadFile<String> {
+public class ReadFileString implements ReadFile {
 
-    public List sorting(List<List<String>> inputList) {
-        List<String> result = new ArrayList<>();
+    public <T>List<T> sorting(List<List<T>> inputList) {
+        List<T> result = new ArrayList<>();
 
         // вспомогательные индексы для сортировки двух коллекций
         int ind1 = 0;
@@ -29,7 +29,7 @@ public class ReadFileString implements ReadFile<String> {
                 result.add(inputList.get(0).get(ind1));
                 ind1++;
             //если значение символов строки первого списка больше второго -> записываем значение второго списка
-            } else if (inputList.get(0).get(ind1).compareTo(inputList.get(1).get(ind2)) > 0) {
+            } else if (((String)inputList.get(0).get(ind1)).compareTo(((String) inputList.get(1).get(ind2))) > 0) {
                 result.add(inputList.get(1).get(ind2));
                 ind2++;
             //иначе записываем значение строки первого списка
@@ -41,38 +41,39 @@ public class ReadFileString implements ReadFile<String> {
         return result;
     }
 
-    public List<List<String>> readFromFile(List<String> inputFileNames) {
+    public <T>List<List<T>> readFromFile(List<String> inputFileNames) {
         //создаем экземпляр общего хранилища прочитанных данных
-        ReadDataBase<String> readDataBase = new ReadDataBase<>();
+        DataWithFiles<T> dataWithFiles = new DataWithFiles<>();
 
         for (String nameFile : inputFileNames) {
             try (BufferedReader readerFromFile = new BufferedReader(new FileReader(nameFile, StandardCharsets.UTF_8))) {
                 List<String> dataWithFile = new ArrayList<>();
                 //вспомогательная переменная для временного хранения строки
-                String line;
+                String readedLine;
 
-                while ((line = readerFromFile.readLine()) != null) {
+                while ((readedLine = readerFromFile.readLine()) != null) {
                     //проверяем строку на наличие пробелов
                     //при наличии пробеза заканчиваем чтение
                     try {
-                        char[] characters = line.toCharArray();
+                        char[] characters = readedLine.toCharArray();
                         for (Character ch : characters) {
                             if (ch == ' ') {
-                                throw new IllegalArgumentException("В файле " + nameFile + ", строка <" + line + "> содержит пробел\n");
+                                throw new IllegalArgumentException("В файле " + nameFile + ", строка <" + readedLine + "> содержит пробел\n");
                             }
                         }
                     } catch (IllegalArgumentException ex) {
                         System.err.printf(ex.getMessage());
                         break;
                     }
-                    dataWithFile.add(line);
+                    dataWithFile.add(readedLine);
                 }
-                readDataBase.listDataFromFile.add(dataWithFile);
+                dataWithFiles.listDataFromFile.add((List<T>) dataWithFile);
 
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         }
-        return readDataBase.listDataFromFile;
+        return dataWithFiles.listDataFromFile;
     }
+
 }

@@ -8,10 +8,10 @@ import java.util.List;
 /**
  * Реализация методов чтения и сортировки для чисел
  */
-public class ReadFileInteger implements ReadFile<Integer> {
+public class ReadFileInteger implements ReadFile {
 
-    public List sorting(List<List<Integer>> inputList) {
-        List<Integer> result = new ArrayList<>();
+    public <T>List<T> sorting(List<List<T>> inputList) {
+        List<T> result = new ArrayList<>();
 
         // вспомогательные индексы для сортировки двух коллекций
         int ind1 = 0;
@@ -27,7 +27,7 @@ public class ReadFileInteger implements ReadFile<Integer> {
                 result.add(inputList.get(0).get(ind1));
                 ind1++;
                 //если значение символов строки первого списка больше второго -> записываем значение второго списка
-            } else if (inputList.get(0).get(ind1) > inputList.get(1).get(ind2)) {
+            } else if (((Integer)inputList.get(0).get(ind1)) > ((Integer) inputList.get(1).get(ind2))) {
                 result.add(inputList.get(1).get(ind2));
                 ind2++;
                 //иначе записываем значение строки первого списка
@@ -39,26 +39,26 @@ public class ReadFileInteger implements ReadFile<Integer> {
         return result;
     }
 
-    public List<List<Integer>> readFromFile(List<String> inputFileNames) {
+    public <T>List<List<T>> readFromFile(List<String> inputFileNames) {
         //создаем экземпляр общего хранилища прочитанных данных
-        ReadDataBase<Integer> readDataBase = new ReadDataBase<>();
+        DataWithFiles<T> dataWithFiles = new DataWithFiles<>();
 
         for (String nameFile : inputFileNames) {
             try (BufferedReader readerFromFile = new BufferedReader(new FileReader(nameFile, StandardCharsets.UTF_8))) {
                 List<Integer> dataWithFile = new ArrayList<>();
                 //вспомогательные переменные для временного хранения считанных данных
-                int num;
-                String line;
-                while ((line = readerFromFile.readLine()) != null) {
-                    num = Integer.parseInt(line);
-                    dataWithFile.add(num);
+                int numberValue;
+                String readedLine;
+                while ((readedLine = readerFromFile.readLine()) != null) {
+                    numberValue = Integer.parseInt(readedLine);
+                    dataWithFile.add(numberValue);
                 }
-                readDataBase.listDataFromFile.add(dataWithFile);
+                dataWithFiles.listDataFromFile.add((List<T>)dataWithFile);
 
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         }
-        return readDataBase.listDataFromFile;
+        return dataWithFiles.listDataFromFile;
     }
 }
