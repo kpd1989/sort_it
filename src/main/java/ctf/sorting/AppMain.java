@@ -10,7 +10,7 @@ public class AppMain {
         //чтение аргументов
         readArgs(args);
        //чтение исходных данных и сортировка
-        List<?> result = getReadFile().sorting(getReadFile().readFromFile(getInputFileNames()));
+        List<?> result = getReadFile().sorting(getReadFile().readFromFile(getListInputFileNames()));
         //запись результата
         getReadFile().writeToFile("out.txt", result);
 

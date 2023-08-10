@@ -9,7 +9,7 @@ import java.util.List;
 public class AppUtils {
 
     //для чтения данных, храним названия переданных файлов
-    private static List<String> inputFileNames;
+    private static List<String> listInputFileNames;
     //стратегия чтения и сортировки данных
     //по умолчанию String
     private static ReadFile readFile = new ReadFileString();
@@ -17,12 +17,12 @@ public class AppUtils {
     public static ReadFile getReadFile() {
         return readFile;
     }
-    public static List<String> getInputFileNames() {
-        return inputFileNames;
+    public static List<String> getListInputFileNames() {
+        return listInputFileNames;
     }
 
     public static void readArgs(String[] args) {
-        inputFileNames=new ArrayList<>();
+        listInputFileNames =new ArrayList<>();
 
         for (String arg : args) {
             if (arg.equals("-i")) {
@@ -33,10 +33,10 @@ public class AppUtils {
                 continue;
             }
             if (arg.contains("txt")) {
-                inputFileNames.add(arg);
+                listInputFileNames.add(arg);
             }
         }
-        if (inputFileNames.size()!=2 || !inputFileNames.contains("txt")){
+        if (listInputFileNames.size()!=2 || !listInputFileNames.contains("txt")){
             System.out.println("Укажите в вызове программы два файла для сортировки");
             System.exit(1);
         }
