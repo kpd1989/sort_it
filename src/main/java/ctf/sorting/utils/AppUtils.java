@@ -36,5 +36,9 @@ public class AppUtils {
                 inputFileNames.add(arg);
             }
         }
+        if (inputFileNames.size()!=2 || !inputFileNames.contains("txt")){
+            System.out.println("Укажите в вызове программы два файла для сортировки");
+            System.exit(1);
+        }
     }
 }
